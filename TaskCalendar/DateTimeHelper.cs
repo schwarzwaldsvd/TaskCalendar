@@ -107,7 +107,7 @@ namespace TaskCalendar
             return (inputTime.TimeOfDay.Hours >= 13 && inputTime.TimeOfDay.Hours < 17);
         }
 
-        public static bool Is8AMSharp(this DateTime inputTime)
+        public static bool Is8AmSharp(this DateTime inputTime)
         {
             //CurrentMoment.Hour==8 && CurrentMoment.Minute == 0
             return (inputTime.Hour == 8 && inputTime.Minute == 0);
@@ -125,12 +125,10 @@ namespace TaskCalendar
             s = s.Date + ts;
             return s;
         }
-
-        public static DateTime SetTimeAfternoon(this DateTime date)
+        public static DateTime AtTime(this DateTime date, int h, int m)
         {
-            DateTime s = date;
-            var ts = new TimeSpan(13, 0, 0);
-            s = s.Date + ts;
+            var s = date;
+            s = s.Date + new TimeSpan(h,m,0);
             return s;
         }
 
@@ -140,5 +138,5 @@ namespace TaskCalendar
         //    EndWorkingDay = new TimeSpan(13, 0, 0)
         //}
 
-}
+    }
 }

@@ -44,7 +44,7 @@ namespace TaskCalendar
             Logger.PrintTask(task5);
 
             // Sample 6
-            var task6 = new Task(750);
+            var task6 = new Task(8*60);
             Logger.PrintTask(task6);
 
         }

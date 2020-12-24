@@ -48,13 +48,13 @@ namespace TaskCalendar
                         {
                             if (_minutesToWork >= HalfWorkingDay)
                             {
-                                CurrentMoment = CurrentMoment.SetTimeAfternoon().AddMinutes(HalfWorkingDay);
+                                CurrentMoment = CurrentMoment.AtTime(13,0).AddMinutes(HalfWorkingDay);
                                 _minutesToWork -= HalfWorkingDay;
                             }
 
                             if (_minutesToWork > 0 && _minutesToWork < HalfWorkingDay)
                             {
-                                CurrentMoment = CurrentMoment.SetTimeAfternoon().AddMinutes(_minutesToWork);
+                                CurrentMoment = CurrentMoment.AtTime(13, 0).AddMinutes(_minutesToWork);
                                 _minutesToWork -= _minutesToWork;
                             }
                             Logger.PrintMinutes(CurrentMoment, _minutesToWork);
@@ -73,33 +73,29 @@ namespace TaskCalendar
                         }
                         else if (_minutesToWork / HalfWorkingDay > 1 && _minutesToWork / HalfWorkingDay < 2)
                         {
-                            CurrentMoment = CurrentMoment.AddMinutes(HalfWorkingDay).SetTimeAfternoon();
+                            CurrentMoment = CurrentMoment.AddMinutes(HalfWorkingDay).AtTime(13, 0);
                             _minutesToWork -= HalfWorkingDay;
                         }
                         else if (_minutesToWork / FullWorkingDay >= 1)
                         {
                             if (CurrentMoment.IsAfterLunchTime()) 
                             {
-                                var ts = new TimeSpan(17, 0, 0);
-                                var s = (CurrentMoment.Date + ts);
-                                var diff = s - CurrentMoment;
-                                CurrentMoment = CurrentMoment.AddMinutes(diff.TotalMinutes);
-                                _minutesToWork -= (int)diff.TotalMinutes;
+                                var remainingMinutesToWorkToday = CurrentMoment.Date.AtTime(17,0) - CurrentMoment;
+                                CurrentMoment = CurrentMoment.AddMinutes(remainingMinutesToWorkToday.TotalMinutes);
+                                _minutesToWork -= (int)remainingMinutesToWorkToday.TotalMinutes;
                             }
                             else
                             {
-                                if (CurrentMoment.Is8AMSharp())
+                                if (CurrentMoment.Is8AmSharp())
                                 {
                                     CurrentMoment = CurrentMoment.AddMinutes(FullWorkingDay + Lunch);
                                     _minutesToWork -= FullWorkingDay;
                                 }
                                 else
                                 {
-                                    var ts = new TimeSpan(17, 0, 0);
-                                    var s = (CurrentMoment.Date + ts);
-                                    var diff = s - CurrentMoment;
-                                    CurrentMoment = CurrentMoment.AddMinutes(diff.TotalMinutes);
-                                    _minutesToWork -= (int)diff.TotalMinutes;
+                                    var remainingMinutesToWorkToday = CurrentMoment.Date.AtTime(17, 0) - CurrentMoment;
+                                    CurrentMoment = CurrentMoment.AddMinutes(remainingMinutesToWorkToday.TotalMinutes);
+                                    _minutesToWork -= (int)remainingMinutesToWorkToday.TotalMinutes;
                                 }
                             }
                         }
