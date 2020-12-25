@@ -31,7 +31,7 @@ namespace TaskCalendar
                         CurrentMoment = CurrentMoment.AddDays(1).SetTime8OClock(); // is weekend or holiday
                     else
                     {
-                        if (CurrentMoment.IsAfterHours())
+                        if (CurrentMoment.IsAfter(17,0))
                         {
                             CurrentMoment = CurrentMoment.AddDays(1).SetTime8OClock();
                             if (CurrentMoment.IsWeekend() || CurrentMoment.IsHoliday())

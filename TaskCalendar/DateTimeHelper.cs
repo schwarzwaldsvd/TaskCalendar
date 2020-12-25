@@ -82,9 +82,11 @@ namespace TaskCalendar
             return (inputDate.DayOfWeek == DayOfWeek.Saturday || inputDate.DayOfWeek == DayOfWeek.Sunday);
         }
 
-        public static bool IsAfterHours(this DateTime inputTime)
+        public static bool IsAfter(this DateTime inputTime, int h, int m)
         {
-            return inputTime.TimeOfDay.Hours >= 17;
+            var s = inputTime;
+            s = s.Date + new TimeSpan(h, m, 0);
+            return inputTime.TimeOfDay.Hours >= h;
         }
 
         public static bool IsBeforeHours(this DateTime inputTime)
@@ -131,12 +133,5 @@ namespace TaskCalendar
             s = s.Date + new TimeSpan(h,m,0);
             return s;
         }
-
-        //public static readonly TimeSpan EndWorkingDay;
-        //static DateTimeHelper
-        //{
-        //    EndWorkingDay = new TimeSpan(13, 0, 0)
-        //}
-
     }
 }
