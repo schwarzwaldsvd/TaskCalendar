@@ -25,6 +25,7 @@ namespace TaskCalendar
         public DateTime GetEndDate()
         {
             var w = new Work();
+            w.MinuteTolerance = 0.01;
             return w.GetEndDate(StartDate, MinutesToWork);
         }
     }

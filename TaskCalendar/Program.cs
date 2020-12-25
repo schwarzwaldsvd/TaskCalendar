@@ -22,7 +22,6 @@ namespace TaskCalendar
 
         static void Main()
         {
-
             //Sample 1
             var task1 = new Task(new DateTime(2018, (int)Months.January, 3, 6, 0, 0), 55);
             Logger.PrintTask(task1);
@@ -35,17 +34,21 @@ namespace TaskCalendar
             var task3 = new Task(new DateTime(2018, (int)Months.August, 21, 5, 0, 0), 4800);
             Logger.PrintTask(task3);
 
-            // Sample 4
+            //Sample 4
             var task4 = new Task(new DateTime(2020, (int)Months.December, 22, 16, 12, 48), 750);
             Logger.PrintTask(task4);
 
             // Sample 5
-            var task5 = new Task(new DateTime(2020, (int)Months.December, 24, 10, 11, 59), 8*60);
+            var task5 = new Task(new DateTime(2020, (int)Months.December, 24, 10, 11, 59), 8 * 60);
             Logger.PrintTask(task5);
 
             // Sample 6
-            var task6 = new Task(8 * 60);
+            var task6 = new Task(8 * 60 + 20);
             Logger.PrintTask(task6);
+
+            // Sample 7
+            var task7 = new Task(120 * 8 * 60 + 20);
+            Logger.PrintTask(task7);
 
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace TaskCalendar
 {
@@ -96,14 +97,11 @@ namespace TaskCalendar
             return inDateTime < s;
         }
 
-        public static bool IsLunchTime(this DateTime inputTime)
+        public static bool TimeIsBetween(this DateTime inputTime, int startH, int startM, int endH, int endM)
         {
-            return (inputTime.TimeOfDay.Hours >= 12 && inputTime.TimeOfDay.Hours < 13);
-        }
-        
-        public static bool IsAfterLunchTime(this DateTime inputTime)
-        {
-            return (inputTime.TimeOfDay.Hours >= 13 && inputTime.TimeOfDay.Hours < 17);
+            var start = inputTime.Date + new TimeSpan(startH, startM, 0);
+            var end = inputTime.Date + new TimeSpan(endH, endM, 0);
+            return (inputTime >= start && inputTime < end);
         }
 
         public static bool TimeIs(this DateTime inputTime, int h, int m)
