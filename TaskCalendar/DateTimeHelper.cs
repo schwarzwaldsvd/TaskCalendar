@@ -82,26 +82,23 @@ namespace TaskCalendar
             return (inputDate.DayOfWeek == DayOfWeek.Saturday || inputDate.DayOfWeek == DayOfWeek.Sunday);
         }
 
-        public static bool IsAfter(this DateTime inputTime, int h, int m)
+        public static bool IsAfter(this DateTime inDateTime, int h, int m)
         {
-            var s = inputTime;
+            var s = inDateTime;
             s = s.Date + new TimeSpan(h, m, 0);
-            return inputTime.TimeOfDay.Hours >= h;
+            return inDateTime >= s;
         }
 
-        public static bool IsBeforeHours(this DateTime inputTime)
+        public static bool IsBefore(this DateTime inDateTime, int h, int m)
         {
-            return inputTime.TimeOfDay.Hours < 8;
+            var s = inDateTime;
+            s = s.Date + new TimeSpan(h, m, 0);
+            return inDateTime < s;
         }
 
         public static bool IsLunchTime(this DateTime inputTime)
         {
             return (inputTime.TimeOfDay.Hours >= 12 && inputTime.TimeOfDay.Hours < 13);
-        }
-        
-        public static bool IsBeforeLunchTime(this DateTime inputTime)
-        {
-            return (inputTime.TimeOfDay.Hours >= 8 && inputTime.TimeOfDay.Hours < 12);
         }
         
         public static bool IsAfterLunchTime(this DateTime inputTime)

@@ -31,7 +31,7 @@ namespace TaskCalendar
                         CurrentMoment = CurrentMoment.AddDays(1).SetTime8OClock(); // is weekend or holiday
                     else
                     {
-                        if (CurrentMoment.IsAfter(17,0))
+                        if (CurrentMoment.IsAfter(17, 0))
                         {
                             CurrentMoment = CurrentMoment.AddDays(1).SetTime8OClock();
                             if (CurrentMoment.IsWeekend() || CurrentMoment.IsHoliday())
@@ -41,14 +41,14 @@ namespace TaskCalendar
                             }
                         }
 
-                        if (CurrentMoment.IsBeforeHours())
+                        if (CurrentMoment.IsBefore(8, 0))
                             CurrentMoment = CurrentMoment.SetTime8OClock();
 
                         if (CurrentMoment.IsLunchTime())
                         {
                             if (_minutesToWork >= HalfWorkingDay)
                             {
-                                CurrentMoment = CurrentMoment.AtTime(13,0).AddMinutes(HalfWorkingDay);
+                                CurrentMoment = CurrentMoment.AtTime(13, 0).AddMinutes(HalfWorkingDay);
                                 _minutesToWork -= HalfWorkingDay;
                             }
 
