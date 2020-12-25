@@ -106,10 +106,11 @@ namespace TaskCalendar
             return (inputTime.TimeOfDay.Hours >= 13 && inputTime.TimeOfDay.Hours < 17);
         }
 
-        public static bool Is8AmSharp(this DateTime inputTime)
+        public static bool TimeIs(this DateTime inputTime, int h, int m)
         {
-            //CurrentMoment.Hour==8 && CurrentMoment.Minute == 0
-            return (inputTime.Hour == 8 && inputTime.Minute == 0);
+            var s = inputTime;
+            s = s.Date + new TimeSpan(h, m, 0);
+            return (inputTime == s);
         }
         
         public static string ToLongString(this DateTime date)
@@ -117,14 +118,7 @@ namespace TaskCalendar
             return $"{date.ToLongDateString()} {date.ToLongTimeString()}";
         }
 
-        public static DateTime SetTime8OClock(this DateTime date)
-        {
-            DateTime s = date;
-            var ts = new TimeSpan(8, 0, 0);
-            s = s.Date + ts;
-            return s;
-        }
-        public static DateTime AtTime(this DateTime date, int h, int m)
+        public static DateTime TimeAt(this DateTime date, int h, int m)
         {
             var s = date;
             s = s.Date + new TimeSpan(h,m,0);

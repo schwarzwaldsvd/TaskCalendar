@@ -36,7 +36,7 @@ namespace TaskCalendar
             Logger.PrintTask(task3);
 
             // Sample 4
-            var task4 = new Task(new DateTime(2020, (int)Months.December, 22, 16, 10, 0), 750);
+            var task4 = new Task(new DateTime(2020, (int)Months.December, 22, 16, 12, 48), 750);
             Logger.PrintTask(task4);
 
             // Sample 5

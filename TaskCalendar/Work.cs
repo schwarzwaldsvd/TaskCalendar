@@ -29,12 +29,12 @@ namespace TaskCalendar
                 while (_minutesToWork > 0)
                 {
                     if (CurrentMoment.IsWeekend() || CurrentMoment.IsHoliday())
-                        CurrentMoment = CurrentMoment.AddDays(1).SetTime8OClock(); // is weekend or holiday
+                        CurrentMoment = CurrentMoment.AddDays(1).TimeAt(8,0); // is weekend or holiday
                     else
                     {
                         if (CurrentMoment.IsAfter(17, 0))
                         {
-                            CurrentMoment = CurrentMoment.AddDays(1).SetTime8OClock();
+                            CurrentMoment = CurrentMoment.AddDays(1).TimeAt(8,0);
                             if (CurrentMoment.IsWeekend() || CurrentMoment.IsHoliday())
                             {
                                 Logger.PrintMinutes(CurrentMoment, _minutesToWork, _minutesWorked);
@@ -43,20 +43,20 @@ namespace TaskCalendar
                         }
 
                         if (CurrentMoment.IsBefore(8, 0))
-                            CurrentMoment = CurrentMoment.SetTime8OClock();
+                            CurrentMoment = CurrentMoment.TimeAt(8,0);
 
                         if (CurrentMoment.IsLunchTime())
                         {
                             if (_minutesToWork >= HalfWorkingDay)
                             {
-                                CurrentMoment = CurrentMoment.AtTime(13, 0).AddMinutes(HalfWorkingDay);
+                                CurrentMoment = CurrentMoment.TimeAt(13, 0).AddMinutes(HalfWorkingDay);
                                 _minutesWorked += HalfWorkingDay;
                                 _minutesToWork -= HalfWorkingDay;
                             }
 
                             if (_minutesToWork > 0 && _minutesToWork < HalfWorkingDay)
                             {
-                                CurrentMoment = CurrentMoment.AtTime(13, 0).AddMinutes(_minutesToWork);
+                                CurrentMoment = CurrentMoment.TimeAt(13, 0).AddMinutes(_minutesToWork);
                                 _minutesWorked += _minutesToWork;
                                 _minutesToWork -= _minutesToWork;
                             }
@@ -79,7 +79,7 @@ namespace TaskCalendar
                         }
                         else if (_minutesToWork / HalfWorkingDay > 1 && _minutesToWork / HalfWorkingDay < 2)
                         {
-                            CurrentMoment = CurrentMoment.AddMinutes(HalfWorkingDay).AtTime(13, 0);
+                            CurrentMoment = CurrentMoment.AddMinutes(HalfWorkingDay).TimeAt(13, 0);
                             _minutesWorked += HalfWorkingDay;
                             _minutesToWork -= HalfWorkingDay;
                         }
@@ -87,14 +87,14 @@ namespace TaskCalendar
                         {
                             if (CurrentMoment.IsAfterLunchTime()) 
                             {
-                                var remainingMinutesToWorkToday = CurrentMoment.Date.AtTime(17,0) - CurrentMoment;
+                                var remainingMinutesToWorkToday = CurrentMoment.Date.TimeAt(17,0) - CurrentMoment;
                                 CurrentMoment = CurrentMoment.AddMinutes(remainingMinutesToWorkToday.TotalMinutes);
                                 _minutesWorked += (int)remainingMinutesToWorkToday.TotalMinutes;
                                 _minutesToWork -= (int)remainingMinutesToWorkToday.TotalMinutes;
                             }
                             else
                             {
-                                if (CurrentMoment.Is8AmSharp())
+                                if (CurrentMoment.TimeIs(8,0))
                                 {
                                     CurrentMoment = CurrentMoment.AddMinutes(FullWorkingDay + Lunch);
                                     _minutesWorked += FullWorkingDay;
@@ -102,7 +102,7 @@ namespace TaskCalendar
                                 }
                                 else
                                 {
-                                    var remainingMinutesToWorkToday = CurrentMoment.Date.AtTime(17, 0) - CurrentMoment;
+                                    var remainingMinutesToWorkToday = CurrentMoment.Date.TimeAt(17, 0) - CurrentMoment;
                                     CurrentMoment = CurrentMoment.AddMinutes(remainingMinutesToWorkToday.TotalMinutes);
                                     _minutesWorked += (int)remainingMinutesToWorkToday.TotalMinutes;
                                     _minutesToWork -= (int)remainingMinutesToWorkToday.TotalMinutes;
