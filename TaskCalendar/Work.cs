@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Xml;
 
 namespace TaskCalendar
 {
@@ -65,6 +64,7 @@ namespace TaskCalendar
                             continue;
                         }
 
+                        // TODO: To review this logic
                         if (_minutesToWork / HalfWorkingDay < 1)
                         {
                             CurrentMoment = CurrentMoment.AddMinutes(_minutesToWork);
