@@ -40,11 +40,11 @@ namespace TaskCalendar
             Logger.PrintTask(task4);
 
             // Sample 5
-            var task5 = new Task(new DateTime(2020, (int)Months.December, 22, 11, 10, 0), 750);
+            var task5 = new Task(new DateTime(2020, (int)Months.December, 24, 10, 11, 59), 8*60);
             Logger.PrintTask(task5);
 
             // Sample 6
-            var task6 = new Task(8*60);
+            var task6 = new Task(8 * 60);
             Logger.PrintTask(task6);
 
         }

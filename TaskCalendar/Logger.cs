@@ -12,10 +12,11 @@ namespace TaskCalendar
             Console.WriteLine();
         }
 
-        public static void PrintMinutes(DateTime now, double minutes)
+        public static void PrintMinutes(DateTime now, double minToWork, double minWorked)
         {
             Console.WriteLine($" ■ {now.ToShortDateString()} {now.ToShortTimeString()}," +
-                              $" remaining : {minutes} minutes ({Math.Round(minutes/60,2)} hours)");
+                              $" remaining : {minToWork} minutes ({Math.Round(minToWork / 60,2)} hours)"+
+                              $" worked: {minWorked} minutes ({Math.Round(minWorked / 60, 2)} hours)");
         }
     }
 }
