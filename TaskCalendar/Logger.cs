@@ -15,8 +15,8 @@ namespace TaskCalendar
         public static void PrintMinutes(DateTime now, double minToWork, double minWorked)
         {
             Console.WriteLine($" ■ {now.ToShortDateString()} {now.ToShortTimeString()}," +
-                              $" remaining : {minToWork} minutes ({Math.Round(minToWork / 60,2)} hours)"+
-                              $" worked: {minWorked} minutes ({Math.Round(minWorked / 60, 2)} hours)");
+                              $" worked: {minWorked} mins ({Math.Round(minWorked / 60, 2)} hours), " +
+                              $"remaining: {minToWork} mins ({Math.Round(minToWork / 60, 2)} hours)");
         }
     }
 }
